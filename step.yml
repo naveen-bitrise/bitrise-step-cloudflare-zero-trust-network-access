@@ -1,0 +1,98 @@
+#
+# A couple of useful guides & docs:
+#
+# - Main Bitrise CLI docs: https://github.com/bitrise-io/bitrise/tree/master/_docs
+# - Step Development Guideline: https://github.com/bitrise-io/bitrise/blob/master/_docs/step-development-guideline.md
+# - Bitrise.yml format spec: https://github.com/bitrise-io/bitrise/blob/master/_docs/bitrise-yml-format-spec.md
+# - Bitrise docs: http://devcenter.bitrise.io/
+# - Bitrise CLI guides: http://devcenter.bitrise.io/bitrise-cli/
+
+title: |-
+  Cloudflare Zero Trust Network Access
+summary: |
+  Bitrise Step for Connecting to Cloudflare Zero Trust Network using Service Tokens. 
+description: |
+  Connect to Cloudflare Zero Trust Network using Service Tokens. 
+
+  ## Prerequisites
+  - You should have a Service Token (Client ID and Client Secret) created in Cloudflare Zero Trust
+  - *Service Auth* should be configured (with the Service Token) as an allowed authentication method to the Access policy protecting your application in Cloudflare Zero Trust
+
+  ## Limitations of accessing using Service Tokens
+
+  #### What Service Tokens CAN Reach
+  - Applications protected by Cloudflare Access policies
+  - Services with hostnames configured in Access
+  - HTTP/HTTPS endpoints behind Access
+
+  #### What Service Tokens CANNOT Reach
+  - **Non-HTTP protocols** (SSH, RDP, databases, etc.) - even if they have hostnames
+  - Services using arbitrary TCP/UDP ports
+  - Direct network-layer access (like traditional VPN access to internal IPs)
+
+website: https://github.com/naveen-bitrise/bitrise-step-cloudflare-zero-trust-network-access
+source_code_url: https://github.com/naveen-bitrise/bitrise-step-cloudflare-zero-trust-network-access
+support_url: https://github.com/naveen-bitrise/bitrise-step-cloudflare-zero-trust-network-access/issues
+
+
+# Type tags are used for categorizing steps, for easier step discovery in Step Libraries.
+# You can find more information about type tags in the Step Development Guideline:
+# https://github.com/bitrise-io/bitrise/blob/master/_docs/step-development-guideline.md
+type_tags:
+  - utility
+
+
+toolkit:
+  bash:
+    entry_file: step.sh
+
+
+inputs:
+  - cf_client_id: $cf_client_id
+    opts:
+      title: "Cloudflare Client ID"
+      summary: "The Client ID for Cloudflare Serive token."
+      description: |
+      is_expand: true
+      is_required: true
+      value_options: []
+
+  - cf_client_secret: $cf_client_secret
+    opts:
+      title: "Cloudflare Client Secret"
+      summary: "The Client Secret for Cloudflare Service token."
+      description: |
+      is_expand: true
+      is_required: true
+      is_sensitive: true
+      value_options: []
+  
+  - service_endpoint: $service_endpoint
+    opts:
+      title: "Service Endpoint URL"
+      summary: "The HTTP/HTTPS Service Endpoint URL of the application protected by Cloudflare Zero Trust Access Policies."
+      description: |
+        HTTP/HTTPS endpoint of service
+      is_expand: true
+      is_required: true
+      value_options: []
+
+  - must_succeed: "yes"
+    opts:
+      title: "Must Succeed"
+      summary: "Whether the step must succeed or not."
+      description: |
+        Set to "no" to log warning instead of failing the step if access fails.
+      is_required: false
+      value_options:
+        - "yes"
+        - "no"
+
+outputs:
+  - cf_access_token:
+    opts:
+      title: "Cloudflare Zero Trust Access Token"
+      summary: "The Access Token for Application access protected by Cloudflare Zero Trust Access Policies."
+      description: |
+        This token is used to authenticate requests to the Cloudflare API.
+        curl -H "cookie: CF_Authorization=${cf_access_token}" "${service_endpoint}"
