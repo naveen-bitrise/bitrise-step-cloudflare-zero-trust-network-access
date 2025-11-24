@@ -6,19 +6,6 @@ Connect to Cloudflare Zero Trust Network using Service Tokens
 - You should have a Service Token (Client ID and Client Secret) created in Cloudflare Zero Trust
 - *Service Auth* should be configured (with the Service Token) as an allowed authentication method to the Access policy protecting your application in Cloudflare Zero Trust
 
-## Limitations of accessing using Service Tokens
-
-#### What Service Tokens CAN Reach
-- Applications protected by Cloudflare Access policies
-- Services with hostnames configured in Access
-- HTTP/HTTPS endpoints behind Access
-
-#### What Service Tokens CANNOT Reach
-- **Non-HTTP protocols** (SSH, RDP, databases, etc.) - even if they have hostnames
-- Services using arbitrary TCP/UDP ports
-- Direct network-layer access (like traditional VPN access to internal IPs)
-
-
 ## ⚙️ Configuration
 
 Store 
@@ -42,6 +29,18 @@ Store
 | `cf_access_token` | The Access Token for Application access protected by Cloudflare Zero Trust Access Policies. |
 
 </details>
+
+## Limitations of accessing using Service Tokens
+
+#### What Service Tokens CAN Reach
+- Applications protected by Cloudflare Access policies
+- Services with hostnames configured in Access
+- HTTP/HTTPS endpoints behind Access
+
+#### What Service Tokens CANNOT Reach
+- **Non-HTTP protocols** (SSH, RDP, databases, etc.) - even if they have hostnames
+- Services using arbitrary TCP/UDP ports
+- Direct network-layer access (like traditional VPN access to internal IPs)
 
 
 

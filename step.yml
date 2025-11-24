@@ -14,11 +14,11 @@ summary: |
 description: |
   Connect to Cloudflare Zero Trust Network using Service Tokens. 
 
-  ## Prerequisites
-  - You should have a Service Token (Client ID and Client Secret) created in Cloudflare Zero Trust
+  ### Prerequisites
+  - You should have a Service Token (Client ID and Client Secret) created in Cloudflare Zero Trust. Access controls > Service credentials > Service Tokens.
   - *Service Auth* should be configured (with the Service Token) as an allowed authentication method to the Access policy protecting your application in Cloudflare Zero Trust
 
-  ## Limitations of accessing using Service Tokens
+  ### Limitations of accessing using Service Tokens
 
   #### What Service Tokens CAN Reach
   - Applications protected by Cloudflare Access policies
