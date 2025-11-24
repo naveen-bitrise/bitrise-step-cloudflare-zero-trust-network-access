@@ -94,5 +94,8 @@ outputs:
       title: "Cloudflare Zero Trust Access Token"
       summary: "The Access Token for Application access protected by Cloudflare Zero Trust Access Policies."
       description: |
-        This token is used to authenticate requests to the Cloudflare API.
+        Use the service token to the headers of all subsequent requests:
         curl -H "cookie: CF_Authorization=${cf_access_token}" "${service_endpoint}"
+
+        If you prefer to use a raw header, send the value as cf-access-token:
+        curl -H "cf-access-token: ${cf_access_token}" "${service_endpoint}"
