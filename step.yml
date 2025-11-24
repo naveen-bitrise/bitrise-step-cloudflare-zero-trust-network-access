@@ -51,7 +51,7 @@ inputs:
   - cf_client_id: $cf_client_id
     opts:
       title: "Cloudflare Client ID"
-      summary: "The Client ID for Cloudflare Serive token."
+      summary: "The Client ID for Cloudflare Service token."
       description: |
       is_expand: true
       is_required: true

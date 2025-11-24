@@ -32,12 +32,12 @@ Store
 
 ## Limitations of accessing using Service Tokens
 
-#### What Service Tokens CAN Reach
+#### What Service Tokens Can Reach
 - Applications protected by Cloudflare Access policies
 - Services with hostnames configured in Access
 - HTTP/HTTPS endpoints behind Access
 
-#### What Service Tokens CANNOT Reach
+#### What Service Tokens Cannot Reach
 - **Non-HTTP protocols** (SSH, RDP, databases, etc.) - even if they have hostnames
 - Services using arbitrary TCP/UDP ports
 - Direct network-layer access (like traditional VPN access to internal IPs)
